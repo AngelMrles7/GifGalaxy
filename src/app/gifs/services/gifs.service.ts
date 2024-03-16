@@ -8,7 +8,7 @@ import { Gif, SearchResponse } from '../interface/gifs.interfaces';
 export class GifsService {
   public gifsList: Gif[] = [];
   private _tagsHistory: string[] = [];
-  private apiKey: string = 'uhgyMwPq8nwy8jSv68KY3sB08ue5TIuC&q';
+  private apiKey: string = 'uhgyMwPq8nwy8jSv68KY3sB08ue5TIuC';
   private serviceUrl: string = 'https://api.giphy.com/v1/gifs';
 
   constructor(private http: HttpClient) {}
@@ -38,10 +38,9 @@ export class GifsService {
       .set('q', tag);
     // Observable
     this.http
-      .get<SearchResponse>(`${this.serviceUrl}/search${params}`)
+      .get<SearchResponse>(`${this.serviceUrl}/search?${params}`)
       .subscribe((res) => {
         this.gifsList = res.data;
-        console.log(res);
       });
   }
 }
